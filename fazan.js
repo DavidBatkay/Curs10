@@ -27,7 +27,7 @@ class Button {
             mouseY >= this.#y &&
             mouseY <= this.#y + this.#h) {
             // console.log("button was clicked", this.#text);
-            letter.nextLetter();
+            letter.startCounting();
         }
     }
 }
@@ -58,9 +58,10 @@ class Letter {
     }
 
     nextLetter(letter) {
-        const finalLetter = "z".charCodeAt();
-        const letterCode = letter.charCodeAt() + 1;
-        if (finalLetter = letterCode) { letter = "a" }
-        letter.#letter = String.fromCharCode(letterCode);
+        let letterCode = letter.#letter.charCodeAt() + 1;
+        const letterCodeA = "A".charCodeAt();
+        if (letterCode > "Z".charCodeAt()) {
+            letterCode = "A".charCodeAt();
+        }
     }
 }
