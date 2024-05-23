@@ -26,8 +26,11 @@ class Button {
             mouseX <= this.#x + this.#w &&
             mouseY >= this.#y &&
             mouseY <= this.#y + this.#h) {
-            // console.log("button was clicked", this.#text);
-            letter.startCounting();
+            //console.log("button was clicked", this.#text);
+            if (this.#text == "Start")
+                letter.startCounting();
+            else
+                letter.stopCounting();
         }
     }
 }
@@ -38,6 +41,7 @@ class Letter {
     #letter;
     #speed;
     #color;
+    #idInterval;
 
     constructor(letter, speed, color, x, y) {
         this.#letter = letter;
@@ -54,7 +58,11 @@ class Letter {
     }
 
     startCounting() {
-        setInterval(this.nextLetter, this.#speed, this)
+        this.#idInterval = setInterval(this.nextLetter, this.#speed, this)
+    }
+
+    stopCounting() {
+        clearInterval(this.#idInterval);
     }
 
     nextLetter(letter) {
@@ -63,5 +71,6 @@ class Letter {
         if (letterCode > "Z".charCodeAt()) {
             letterCode = "A".charCodeAt();
         }
+        letter.#letter = String.fromCharCode(letterCode);
     }
 }
